@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +27,7 @@ public class BoardServiceImpl implements BoardService{
     public BoardDto findById(Long id) {
         ModelMapper mapper = new ModelMapper();
 
-        Board board =  boardRepository.findById(id).orElseThrow(NullPointerException::new);
+        Board board =  boardRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
         // 조회수 증가
         board.setHit(board.getHit() + 1);
